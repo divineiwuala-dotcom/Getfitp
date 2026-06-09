@@ -1,0 +1,623 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #f2f2f7;
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --gray: #8e8e93;
+  --gray-light: #e5e5ea;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --lime: #84cc16;
+  --lime-dark: #65a30d;
+  --red: #ef4444;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --nav-height: 72px;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Figtree', sans-serif;
+  background: var(--bg);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--bg);
+}
+
+/* Cards */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Buttons */
+.btn-lime {
+  background: var(--lime);
+  color: var(--black);
+  border: none;
+  border-radius: 100px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 18px 32px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: -0.2px;
+}
+.btn-lime:active {
+  background: var(--lime-dark);
+  transform: scale(0.98);
+}
+
+.btn-blue {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 32px;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-blue:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+.btn-black {
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 18px 32px;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.15s;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-light);
+  display: flex;
+  height: var(--nav-height);
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Figtree', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gray);
+  transition: color 0.15s;
+  padding-top: 8px;
+}
+.nav-item.active {
+  color: var(--blue);
+}
+.nav-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Page wrapper */
+.page {
+  min-height: 100vh;
+  padding-bottom: calc(var(--nav-height) + 16px);
+}
+
+/* Bottom sheet */
+.sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  animation: fadeIn 0.2s ease;
+}
+.sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  border-radius: 24px 24px 0 0;
+  padding: 24px 20px 40px;
+  z-index: 201;
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--gray-light);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from { transform: translateX(-50%) translateY(100%); }
+  to { transform: translateX(-50%) translateY(0); }
+}
+
+/* Pill badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.pill-gray {
+  background: #e5e5ea;
+  color: #3a3a3c;
+}
+.pill-lime {
+  background: var(--lime);
+  color: var(--black);
+}
+.pill-blue {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+/* ── Active Workout (full screen) ─────────────────────── */
+.workout-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--black);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.workout-progress-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.15);
+  position: relative;
+}
+.workout-progress-fill {
+  height: 100%;
+  background: var(--lime);
+  transition: width 0.4s ease;
+}
+
+.workout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  color: white;
+}
+.workout-header-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.workout-header-count {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.exercise-video-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #111;
+  flex-shrink: 0;
+}
+.exercise-video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.exercise-info {
+  flex: 1;
+  padding: 24px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.exercise-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+}
+.exercise-meta {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+.set-indicator {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.set-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+}
+.set-dot.done {
+  background: var(--lime);
+}
+.set-dot.current {
+  background: white;
+}
+
+.next-exercise-preview {
+  padding: 12px 20px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.next-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.next-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.workout-cta {
+  padding: 16px 20px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+/* ── Rest Timer ───────────────────────────────────────── */
+.rest-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.rest-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.rest-timer {
+  font-size: 72px;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+}
+.rest-skip {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--lime);
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* ── Workout Rating ───────────────────────────────────── */
+.rating-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--white);
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  max-width: 430px;
+  margin: 0 auto;
+  gap: 0;
+}
+.rating-emoji {
+  width: 64px;
+  height: 64px;
+  background: var(--blue-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.rating-emoji svg {
+  width: 32px;
+  height: 32px;
+  color: var(--blue);
+}
+.rating-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 6px;
+  text-align: center;
+}
+.rating-subtitle {
+  font-size: 15px;
+  color: var(--gray);
+  margin-bottom: 32px;
+  text-align: center;
+}
+.rating-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.rating-stat {
+  flex: 1;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 16px 12px;
+  text-align: center;
+}
+.rating-stat-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--black);
+}
+.rating-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray);
+  margin-top: 2px;
+}
+.rating-options {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.rating-btn {
+  flex: 1;
+  padding: 16px 8px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--gray-light);
+  background: var(--white);
+  font-family: 'Figtree', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.rating-btn svg {
+  width: 22px;
+  height: 22px;
+}
+.rating-btn.selected-easy {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-light);
+}
+.rating-btn.selected-perfect {
+  border-color: var(--lime);
+  color: var(--lime-dark);
+  background: #f7fee7;
+}
+.rating-btn.selected-hard {
+  border-color: var(--red);
+  color: var(--red);
+  background: #fef2f2;
+}
+
+/* ── Coach Chat ───────────────────────────────────────── */
+.chat-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(var(--nav-height) + 16px);
+}
+.chat-header {
+  padding: 56px 20px 16px;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-light);
+}
+.chat-header-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--black);
+}
+.chat-header-sub {
+  font-size: 13px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+}
+.chat-bubble-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+.chat-bubble-wrap.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.chat-bubble-wrap.coach {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+.chat-bubble {
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.chat-bubble.user {
+  background: var(--blue);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+.chat-bubble.coach {
+  background: var(--white);
+  color: var(--black);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow);
+}
+.chat-time {
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 4px;
+  padding: 0 4px;
+}
+.chat-typing {
+  display: flex;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--white);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow);
+  width: fit-content;
+}
+.chat-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gray);
+  animation: typingDot 1.2s infinite;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingDot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-4px); }
+}
+
+.chat-input-bar {
+  position: fixed;
+  bottom: var(--nav-height);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-light);
+  padding: 10px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  z-index: 50;
+}
+.chat-input {
+  flex: 1;
+  background: var(--bg);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-family: 'Figtree', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--black);
+  resize: none;
+  outline: none;
+  max-height: 100px;
+  line-height: 1.4;
+}
+.chat-input::placeholder {
+  color: var(--gray);
+}
+.chat-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+}
+.chat-send-btn:disabled {
+  opacity: 0.4;
+}
+.chat-send-btn svg {
+  width: 18px;
+  height: 18px;
+  color: white;
+}
